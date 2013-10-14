@@ -2,18 +2,21 @@
 This is the flask file that will define the views
 necessary to serve the app.
 """
-from flask import Flask
-
+from flask import render_template
 from ddanalytics.conf import MOCK_USERNAME, SECRET_KEY
+from ddanalytics import app
 
-
-app = Flask(__name__)
 
 # Main Navigation ##########################
 @app.route('/')
 def home():
-    return 're'
-
+    """
+    Renders the home page for an-unauth'd user. Users who
+    are auth'd will be redirected to their `analytics` page.
+    """
+    # if request.user.is_authenticated():
+    #     return redirect(url_for('analytics'))
+    return render_template('home.html')
 
 @app.route('/analytics/')
 def analytics():
@@ -55,4 +58,4 @@ def logout():
 
 app.secret_key = SECRET_KEY
 if __name__ == '__main__':
-    app.run()
+    app.run(debug=True)

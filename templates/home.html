@@ -1,5 +1,24 @@
 {% extends "base.html" %}
 
 {% block content %}
-    Sign Up
+    <div class='container-fluid splash-container'>
+        <section id='splash-header'>
+            <img src='static/img/logo.jpg' width='264' height='80'/>
+        </section>
+        <section id='splash-separator'></section>
+
+        <section id='splash-main-container'>
+            <img src='static/img/splash-plus.png' width='699' height='260' />
+            <br /><br />
+
+            <section id='splash-button'>
+                <input type='button' class='btn btn-splash' value='Sign In With DroneDeploy &raquo;' />
+            </section>
+
+            <section id='splash-signup'>
+                <span class='b'>Analyze Your Drone Performance.</span><br />
+                <span>Get The Most Out Of Your Fleet.</span>
+            </section>
+        </section>
+    </div>
 {% endblock %}
