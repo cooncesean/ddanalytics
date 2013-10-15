@@ -34,7 +34,73 @@ def fleet():
     optimize their fleet based on their drones' configurations
     compared to that of the rest of the community.
     """
-    return render_template('fleet.html')
+    recommendations = [
+        {
+            'drone': 'Parrot AR 2.0',
+            'current_spec': {
+                'battery': 'Default AR Lipo',
+                'propeller': 'Default AR Propellers',
+                'motor': 'Brushless Parrot Motor',
+            },
+            'recommendation': [
+                {
+                    'type': 'Battery',
+                    'name': 'AR Max Life Lipo',
+                    'benefit': '15% increase in batery life',
+                    'link': 'http://www.amazon.com/Parrot-AR-Drone-Battery-LiPo-Replacement/dp/B0041G5Y8W?referrer_partner=dronedeploy-analytics'
+                },
+                {
+                    'type': 'Propeller',
+                    'name': '16" Carbon Fiber Props',
+                    'benefit': '56% increase in lift',
+                    'link': 'http://www.amazon.com/Parrot-Upgrade-Propeller-Blades-Carbon/dp/B00CCJL3BC?referrer_partner=dronedeploy-analytics'
+                }
+            ]
+        },
+        {
+            'drone': 'MD4-1000',
+            'current_spec': {
+                'battery': 'MD4-5500 Lipo',
+                'propeller': 'MD4 Prop',
+                'motor': 'Brushless MD4 Motor',
+            },
+            'recommendation': [
+                {
+                    'type': 'Motor',
+                    'name': 'Traxxas 3351',
+                    'benefit': '32% increase in power',
+                    'link': 'http://www.amazon.com/Traxxas-3351-Velineon-Brushless-Motor/dp/B000SU3VCG?referrer_partner=dronedeploy-analytics'
+                }
+            ]
+        },
+        {
+            'drone': 'DJI Phantom',
+            'current_spec': {
+                'battery': 'DJI Flight Battery',
+                'propeller': 'DJI Carbon Props',
+                'motor': 'Brushless DJI',
+            },
+            'recommendation': [
+                {
+                    'type': 'Battery',
+                    'name': 'DJI Phantom 4000 Lipo',
+                    'benefit': '62% increase in battery life',
+                    'link': 'http://www.bhphotovideo.com/bnh/controller/home?O=&sku=964487&Q=&is=REG&A=details&referrer_partner=dronedeploy-analytics'
+                }
+            ]
+        },
+        {
+            'drone': 'TurboAce X830',
+            'current_spec': {
+                'battery': 'X830 Lipo',
+                'propeller': 'X830 Polyurethane Propeller',
+                'motor': 'X830 Brushless Motor',
+            },
+            'recommendation': [
+            ]
+        }
+    ]
+    return render_template('fleet.html', recommendations=recommendations)
 
 # Authentication ###########################
 @app.route('/login/')
