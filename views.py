@@ -2,9 +2,11 @@
 This is the flask file that will define the views
 necessary to serve the app.
 """
-from flask import render_template
-from ddanalytics.conf import MOCK_USERNAME, SECRET_KEY
-from ddanalytics import app
+from flask import render_template, request, url_for, redirect
+from flask_login import login_user, login_required, logout_user
+from ddanalytics import app, login_manager
+from ddanalytics.conf import MOCK_USERNAME
+from ddanalytics.utils import load_user
 
 
 # Main Navigation ##########################
@@ -19,6 +21,7 @@ def home():
     return render_template('home.html')
 
 @app.route('/analytics/')
+@login_required
 def analytics():
     """
     Show auth'd users their `anaytlics` page based on mock
@@ -27,6 +30,7 @@ def analytics():
     return render_template('analytics.html')
 
 @app.route('/fleet/')
+@login_required
 def fleet():
     """
     Show auth'd users their `fleet` page. It renders all drone
@@ -104,23 +108,23 @@ def fleet():
 
 # Authentication ###########################
 @app.route('/login/')
-def login():
+def login(methods=['GET']):
     """
     'Authenticate' the user coming back from the fake
     DroneDeploy site with a mock oauth token and redirect
     them to the analytics view.
     """
-    if 'token' in request.GET:
-        session['username'] = MOCK_USERNAME
-        return redirect(url_for('analytics'))
-    return Http404
+    # We are faking oAuth for the sake of the demo
+    if request.args.get('token', None):
+        # Always load the default 'mock' user
+        user = load_user(MOCK_USERNAME)
+        login_user(user)
+        return redirect(request.args.get('next', url_for('analytics')))
+    return 'Http404'
 
 @app.route('/logout/')
+@login_required
 def logout():
     " De-authenticate (is that a word?) the user. "
-    session.pop('username', None)
-    return redirect(url_for('index'))
-
-app.secret_key = SECRET_KEY
-if __name__ == '__main__':
-    app.run(debug=True)
+    logout_user()
+    return redirect(url_for('home'))

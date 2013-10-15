@@ -3,7 +3,12 @@
 {% block content %}
     <div class='container-fluid'>
         <section id='splash-header'>
-            <img src='{{ url_for('static', filename='img/logo.jpg') }}' width='264' height='80'/>
+            <div class='fl'>
+                <img src='{{ url_for('static', filename='img/logo.jpg') }}' width='264' height='80'/>
+            </div>
+            <div id='logout'>
+                <a href='{{ url_for('logout') }}'>Logout</a>
+            </div>
         </section>
         <nav class="navbar navbar-default" role="navigation">
             <ul class="nav navbar-nav">

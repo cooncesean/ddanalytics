@@ -16,7 +16,7 @@
         {% block content %}{% endblock %}
 
         {# FOOTER #}
-        <section id='footer'>
+        <section id='footer' {% if request.path == '/' %}style='margin:0px'{% endif %}>
             <div class='fl'>
                 This is a fake site made for entertainment purposes.
                 It is powered by <a href='http://flask.pocoo.org/'>Flask</a>, backed by <a href='http://www.mongodb.org/'>Mongo</a>
