@@ -1,0 +1,29 @@
+<h3>Average Battery Life By Drone Type</h3>
+<div id="chart-battery-life" style="width:100%; height:400px;"></div>
+<script>
+    $('#chart-battery-life').highcharts({
+        chart: {
+            type: 'column'
+        },
+        title: {
+            text: null
+        },
+        xAxis: {
+            categories: [
+                'Parrot AR 2.0', 'Micro Drone', 'DJI Phantom', 'Turbo Ace X830-D', 'Skybotix CoaX'
+            ]
+        },
+        yAxis: {
+            min: 0,
+            title: {
+                text: 'Average Battery Life'
+            }
+        },
+        series: [{
+            showInLegend: false,
+            data: [
+                3.7, 2.1, 1.8, 3.1, 2.5
+            ]
+        }]
+    });
+</script>

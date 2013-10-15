@@ -1,0 +1,32 @@
+<h3>Drone Usage</h3>
+<div id="chart-drone-usage" style="width:100%;"></div>
+<script>
+    $('#chart-drone-usage').highcharts({
+        chart: {
+            type: 'pie'
+        },
+        title: {
+            text: null
+        },
+        plotOptions: {
+            pie: {
+                allowPointSelect: true,
+                cursor: 'pointer',
+                dataLabels: {
+                    enabled: false
+                },
+                showInLegend: true
+            }
+        },
+        series: [{
+            type: 'pie',
+            data: [
+                ['Micro', 26.8],
+                ['Parrot AR', 16.8],
+                ['Phantom',    8.5],
+                ['Turbo Ace',     6.2],
+                ['Coax',   0.7]
+            ]
+        }]
+    });
+</script>

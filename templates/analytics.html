@@ -8,79 +8,17 @@
 
 {% block authenticated_content %}
     <div class="row">
+
+        {# LEFT SIDE MAIN CONTENT ###########}
         <div class="col-md-8">
-            <h3>Flights Over Time By Drone Type</h3>
-            <div id="container" style="width:100%; height:400px;"></div>
-            <script>
-                $('#container').highcharts({
-                    chart: {
-                        type: 'area'
-                    },
-                    title: {
-                        text: ''
-                    },
-                    xAxis: {
-                        endOnTick: false,
-                        startOnTick: false,
-                        min: 0.5,
-                        max: 5.5,
-                        categories: [
-                            'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct'
-                        ]
-                    },
-                    yAxis: {
-                        min: 0,
-                        title: {
-                            text: 'Number of Flights'
-                        }
-                    },
-                    series: [{
-                        name: 'DJI Phantom',
-                        data: [
-                            31, 23, 40, 48, 35, 61, 74
-                        ]
-                    },
-                    {
-                        name: 'Parrot AR 2.0',
-                        data: [
-                            50, 21, 34, 31, 23, 33, 51
-                        ]
-                    },
-                    {
-                        name: 'Micro Drone',
-                        data: [
-                            12, 14, 26, 11, 10, 17, 44
-                        ]
-                    }]
-                });
-
-            </script>
+            {% include 'modules/chart/flights_over_time.html' %}
+            {% include 'modules/chart/battery_life_by_drone_type.html' %}
         </div>
-        <div class="col-md-4">
-            <h3>Statistics</h3>
-            <table class="table table-striped">
-                <tr>
-                    <td>Avg. Flight Time</td>
-                    <td>3.4 hours</td>
-                </tr>
-                <tr>
-                    <td>Longest Flight</td>
-                    <td>4.8 hours</td>
-                </tr>
-                <tr>
-                    <td>Highest Flight</td>
-                    <td>2,301 feet</td>
-                </tr>
-                <tr>
-                    <td>Flights Per Month</td>
-                    <td>65 flights</td>
-                </tr>
-                <tr>
-                    <td>Most Efficient Drone</td>
-                    <td>Parrot AR 2.0</td>
-                </tr>
 
-            </table>
+        {# RIGHT SIDE ASIDE CONTENT #########}
+        <div class="col-md-4">
+            {% include 'modules/table/fleet_statistics.html' %}
+            {% include 'modules/chart/drone_usage.html' %}
         </div>
     </div>
 {% endblock %}
