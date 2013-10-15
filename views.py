@@ -2,7 +2,8 @@
 This is the flask file that will define the views
 necessary to serve the app.
 """
-from flask import render_template, request, url_for, redirect
+from flask import render_template, request, url_for, redirect, \
+    abort
 from flask_login import login_user, login_required, logout_user
 from ddanalytics import app, login_manager
 from ddanalytics.conf import MOCK_USERNAME, REFERRER_PARTER_NAME
@@ -120,7 +121,7 @@ def login(methods=['GET']):
         user = load_user(MOCK_USERNAME)
         login_user(user)
         return redirect(request.args.get('next', url_for('analytics')))
-    return 'Http404'
+    return abort(404)
 
 @app.route('/logout/')
 @login_required

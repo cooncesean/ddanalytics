@@ -1,3 +1,4 @@
+import datetime
 from ddanalytics import db
 from flask import url_for
 
@@ -12,6 +13,15 @@ class User(db.Document):
     """
     username = db.StringField(unique=True, max_length=255, required=True)
     drones = db.ListField(db.EmbeddedDocumentField('Drone'))
+    avg_flight_time = db.DecimalField()
+    longest_flight_time = db.DecimalField()
+    cumulative_flight_time = db.IntField()
+    highest_flight = db.IntField()
+    avg_flights_per_month = db.IntField()
+    cumulative_flights = db.IntField()
+    most_efficient_drone = db.StringField(max_length=255)
+    most_used_drone = db.StringField(max_length=255)
+    last_flight_date = db.DateTimeField(default=datetime.datetime.now)
 
     meta = {
         'indexes': ['username'],
@@ -32,13 +42,14 @@ class User(db.Document):
     def get_id(self):
         return self.username
 
-class DroneType(db.Document):
-    " A specific brand/model of drone. "
-    model_name = db.StringField(max_length=255, required=True)
+class Drone(db.Document):
+    " A drone object that belongs to a specific user. "
+    user = db.ReferenceField(User)
+    model = db.StringField(max_length=255, required=True)
     manufacturer = db.StringField(max_length=255, required=True)
-
-    def get_absolute_url(self):
-        return url_for('post', kwargs={"slug": self.slug})
+    battery = db.StringField(max_length=255)
+    propeller = db.StringField(max_length=255)
+    motor = db.StringField(max_length=255)
 
     def __unicode__(self):
-        return self.title
+        return '%s: %s[%s]' % (self.user.username, self.model, self.manufacturer)
