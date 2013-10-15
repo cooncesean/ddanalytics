@@ -94,6 +94,5 @@ div.splash-container{
 }
 .navbar-default .navbar-nav>.active>a, .navbar-default .navbar-nav>.active>a:hover, .navbar-default .navbar-nav>.active>a:focus {
     background: #d4d4d4;
-
-
+    font-weight: bold;
 }
