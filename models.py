@@ -14,7 +14,7 @@ class User(db.Document):
     """
     username = db.StringField(unique=True, max_length=255, required=True)
     drones = db.ListField(db.EmbeddedDocumentField('Drone'))
-    flights = db.ListField(db.EmbeddedDocumentField('Drone'))
+    flights = db.ListField(db.EmbeddedDocumentField('FlightHistory'))
     avg_flight_time = db.DecimalField()
     longest_flight_time = db.DecimalField()
     cumulative_flight_time = db.IntField()
@@ -66,8 +66,11 @@ class Drone(db.Document):
     @classmethod
     def post_delete(cls, sender, document, **kwargs):
         " Update the `User.drones` ListField. "
-        document.user.drones.remove(document)
-        document.user.save()
+        try:
+            document.user.drones.remove(document)
+            document.user.save()
+        except ValueError:
+            pass
 
 post_save.connect(Drone.post_save, sender=Drone)
 post_delete.connect(Drone.post_delete, sender=Drone)
@@ -88,8 +91,11 @@ class FlightHistory(db.Document):
     @classmethod
     def post_delete(cls, sender, document, **kwargs):
         " Update the `User.flights` ListField. "
-        document.user.flights.remove(document)
-        document.user.save()
+        try:
+            document.user.flights.remove(document)
+            document.user.save()
+        except ValueError:
+            pass
 
 post_save.connect(FlightHistory.post_save, sender=FlightHistory)
 post_delete.connect(FlightHistory.post_delete, sender=FlightHistory)
