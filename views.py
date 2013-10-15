@@ -5,7 +5,7 @@ necessary to serve the app.
 from flask import render_template, request, url_for, redirect
 from flask_login import login_user, login_required, logout_user
 from ddanalytics import app, login_manager
-from ddanalytics.conf import MOCK_USERNAME
+from ddanalytics.conf import MOCK_USERNAME, REFERRER_PARTER_NAME
 from ddanalytics.utils import load_user
 
 
@@ -51,13 +51,13 @@ def fleet():
                     'type': 'Battery',
                     'name': 'AR Max Life Lipo',
                     'benefit': '15% increase in batery life',
-                    'link': 'http://www.amazon.com/Parrot-AR-Drone-Battery-LiPo-Replacement/dp/B0041G5Y8W?referrer_partner=dronedeploy-analytics'
+                    'link': 'http://www.amazon.com/Parrot-AR-Drone-Battery-LiPo-Replacement/dp/B0041G5Y8W?referrer_partner=%s' % REFERRER_PARTER_NAME
                 },
                 {
                     'type': 'Propeller',
                     'name': '16" Carbon Fiber Props',
                     'benefit': '56% increase in lift',
-                    'link': 'http://www.amazon.com/Parrot-Upgrade-Propeller-Blades-Carbon/dp/B00CCJL3BC?referrer_partner=dronedeploy-analytics'
+                    'link': 'http://www.amazon.com/Parrot-Upgrade-Propeller-Blades-Carbon/dp/B00CCJL3BC?referrer_partner=%s' % REFERRER_PARTER_NAME
                 }
             ]
         },
@@ -73,7 +73,7 @@ def fleet():
                     'type': 'Motor',
                     'name': 'Traxxas 3351',
                     'benefit': '32% increase in power',
-                    'link': 'http://www.amazon.com/Traxxas-3351-Velineon-Brushless-Motor/dp/B000SU3VCG?referrer_partner=dronedeploy-analytics'
+                    'link': 'http://www.amazon.com/Traxxas-3351-Velineon-Brushless-Motor/dp/B000SU3VCG?referrer_partner=%s' % REFERRER_PARTER_NAME
                 }
             ]
         },
@@ -89,7 +89,7 @@ def fleet():
                     'type': 'Battery',
                     'name': 'DJI Phantom 4000 Lipo',
                     'benefit': '62% increase in battery life',
-                    'link': 'http://www.bhphotovideo.com/bnh/controller/home?O=&sku=964487&Q=&is=REG&A=details&referrer_partner=dronedeploy-analytics'
+                    'link': 'http://www.bhphotovideo.com/bnh/controller/home?O=&sku=964487&Q=&is=REG&A=details&referrer_partner=%s' % REFERRER_PARTER_NAME
                 }
             ]
         },

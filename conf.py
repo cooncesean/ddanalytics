@@ -1,2 +1,3 @@
 MOCK_USERNAME = 'Mock User'
 SECRET_KEY = 'rt3VA0Zr98j3yXRXHHjmNLWX'
+REFERRER_PARTER_NAME = 'dronedeploy-analytics'

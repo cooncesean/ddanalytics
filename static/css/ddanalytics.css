@@ -103,3 +103,6 @@ div.splash-container{
     height: 80px;
     font-size: 11px;
 }
+.table thead{
+    background: rgba(0, 128, 208, .2);
+}
