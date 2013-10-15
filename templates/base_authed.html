@@ -1,0 +1,26 @@
+{% extends "base.html" %}
+
+{% block content %}
+    <div class='container-fluid'>
+        <section id='splash-header'>
+            <img src='{{ url_for('static', filename='img/logo.jpg') }}' width='264' height='80'/>
+        </section>
+        <nav class="navbar navbar-default" role="navigation">
+            <ul class="nav navbar-nav">
+                <li {% if request.path == '/analytics/' %}class='active'{% endif %}>
+                    <a href='{{ url_for('analytics') }}'>Analytics</a>
+                </li>
+                <li {% if request.path == '/fleet/' %}class='active'{% endif %}>
+                    <a href='{{ url_for('fleet') }}'>Your Fleet</a>
+                </li>
+            </ul>
+        </nav>
+        <section class='page-description'>
+            {% block page_description %}{% endblock %}
+        </section>
+
+        <section id='authed-content-container'>
+            {% block authenticated_content %}{% endblock %}
+        </section>
+    </div>
+{% endblock %}

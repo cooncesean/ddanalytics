@@ -24,7 +24,7 @@ def analytics():
     Show auth'd users their `anaytlics` page based on mock
     data pulled in from their DroneDeploy account.
     """
-    return 'analytics'
+    return render_template('analytics.html')
 
 @app.route('/fleet/')
 def fleet():
@@ -34,7 +34,7 @@ def fleet():
     optimize their fleet based on their drones' configurations
     compared to that of the rest of the community.
     """
-    return 'fleet'
+    return render_template('fleet.html')
 
 # Authentication ###########################
 @app.route('/login/')
@@ -54,7 +54,6 @@ def logout():
     " De-authenticate (is that a word?) the user. "
     session.pop('username', None)
     return redirect(url_for('index'))
-
 
 app.secret_key = SECRET_KEY
 if __name__ == '__main__':

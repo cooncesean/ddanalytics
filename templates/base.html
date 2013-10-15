@@ -2,19 +2,27 @@
     <head>
         <title>DroneDeploy Analytics</title>
         <link href="//netdna.bootstrapcdn.com/bootstrap/3.0.0/css/bootstrap.min.css" rel="stylesheet">
-        <link href="static/css/ddanalytics.css" rel="stylesheet">
+        <link href="{{ url_for('static', filename='css/ddanalytics.css') }}" rel="stylesheet">
+         <link rel="icon" type="image/png" href="{{ url_for('static', filename='img/favicon.png') }}">
 
         <link href="http://fonts.googleapis.com/css?family=Lato:100,300,400" rel="stylesheet" type="text/css">
+
+        <script src='http://codeorigin.jquery.com/jquery-2.0.3.min.js'></script>
+        <script src='//netdna.bootstrapcdn.com/bootstrap/3.0.0/js/bootstrap.min.js'></script>
+        <script src="http://code.highcharts.com/highcharts.js"></script>
+
     </head>
     <body>
         {% block content %}{% endblock %}
 
+        {# FOOTER #}
         <section id='footer'>
-            <div style='float:left;'>
-                <strong>Disclaimer:</strong> This is a fake site for entertainment purposes.
+            <div class='fl'>
+                <strong>Disclaimer:</strong> This is a fake site made for entertainment purposes.
+                It is powered by <a href='http://flask.pocoo.org/'>Flask</a> and backed by <a href='http://www.mongodb.org/'>Mongo</a>.
             </div>
-            <div style='float:right;text-align: right;'>
-                Source code can be found on <a href='https://github.com/cooncesean/ddanalytics'>GitHub</a><br />
+            <div class='fr tr'>
+                Source code can be found on <a href='https://github.com/cooncesean/ddanalytics' class='b'>GitHub</a><br />
             </div>
         </section>
     </body>
