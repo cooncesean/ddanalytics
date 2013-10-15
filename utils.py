@@ -1,7 +1,7 @@
 import datetime
 import random
 from ddanalytics import login_manager
-from ddanalytics.models import User, Drone
+from ddanalytics.models import User, Drone, FlightHistory
 from ddanalytics.conf import MOCK_USERNAME
 
 
@@ -28,6 +28,7 @@ def generate_dev_data():
         last_flight_date = datetime.datetime.now() - datetime.timedelta(days=5),
     )
     print user
+    print '-----------------'
 
     MODEL_AND_MANFACTURERS = [
         ('Parrot', 'AR 2.0', 'Default AR Lipo', 'Default AR Props', 'Brushless Parrot Motor'),
@@ -36,7 +37,7 @@ def generate_dev_data():
         ('TurboAce', 'X830', 'X830 Lipo', 'X830 Polyurethane Propeller', 'X830 Brushless Motor'),
     ]
     print 'Creating Drone Army....'
-    for i in range(random.randint(3, 7)):
+    for i in range(random.randint(5, 7)):
         mm_tup = MODEL_AND_MANFACTURERS[random.randint(0, len(MODEL_AND_MANFACTURERS) - 1)]
         drone = Drone.objects.create(
             user = user,
@@ -47,6 +48,26 @@ def generate_dev_data():
             motor = mm_tup[4],
         )
         print drone
+    print '-----------------'
+
+    print 'Creating Flight History For User'
+    now = datetime.datetime.now()
+    FLIGHT_DATES = [
+        now - datetime.timedelta(days=30 * 6),
+        now - datetime.timedelta(days=30 * 5),
+        now - datetime.timedelta(days=30 * 4),
+        now - datetime.timedelta(days=30 * 3),
+        now - datetime.timedelta(days=30 * 2),
+        now - datetime.timedelta(days=30 * 1),
+        now,
+    ]
+    for flight_date in FLIGHT_DATES:
+        for i in range(random.randint(10, 25)):
+            fl = FlightHistory.objects.create(
+                user = user,
+                drone = user.drones[random.randint(0, len(user.drones) - 1)],
+                flight_date = flight_date
+            )
 
 def _trim_float(decimal, precision=2):
     " Utility method to trim a floated "

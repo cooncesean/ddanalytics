@@ -3,3 +3,4 @@ flask-script
 mongoengine
 flask_mongoengine
 flask-login
+blinker

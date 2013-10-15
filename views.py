@@ -4,9 +4,11 @@ necessary to serve the app.
 """
 from flask import render_template, request, url_for, redirect, \
     abort
-from flask_login import login_user, login_required, logout_user
+from flask_login import login_user, login_required, logout_user, \
+    current_user
 from ddanalytics import app, login_manager
 from ddanalytics.conf import MOCK_USERNAME, REFERRER_PARTER_NAME
+from ddanalytics.models import Drone
 from ddanalytics.utils import load_user
 
 
@@ -17,8 +19,8 @@ def home():
     Renders the home page for an-unauth'd user. Users who
     are auth'd will be redirected to their `analytics` page.
     """
-    # if request.user.is_authenticated():
-    #     return redirect(url_for('analytics'))
+    if request.user.is_authenticated():
+        return redirect(url_for('analytics'))
     return render_template('home.html')
 
 @app.route('/analytics/')
@@ -28,6 +30,8 @@ def analytics():
     Show auth'd users their `anaytlics` page based on mock
     data pulled in from their DroneDeploy account.
     """
+    # Get `flights over time` data for the current user
+    # current_user.
     return render_template('analytics.html')
 
 @app.route('/fleet/')
