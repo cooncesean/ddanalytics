@@ -2,38 +2,38 @@
 <table class="table table-striped">
     <tr>
         <td>Avg. Flight Time</td>
-        <td>3.4 hours</td>
+        <td>{{ current_user.avg_flight_time }} hours</td>
     </tr>
     <tr>
         <td>Longest Flight</td>
-        <td>4.8 hours</td>
+        <td>{{ current_user.longest_flight_time }} hours</td>
     </tr>
     <tr>
         <td>Cum. Flight Time</td>
-        <td>123.4 hours</td>
+        <td>{{ current_user.cumulative_flight_time }} hours</td>
     </tr>
     <tr>
         <td>Highest Flight</td>
-        <td>2,301 feet</td>
+        <td>{{ current_user.highest_flight|format }} feet</td>
     </tr>
     <tr>
         <td>Flights Per Month</td>
-        <td>65 flights</td>
+        <td>{{ current_user.avg_flights_per_month }} flights</td>
     </tr>
     <tr>
         <td>Cum. Flights</td>
-        <td>368 flights</td>
+        <td>{{ current_user.cumulative_flights }} flights</td>
     </tr>
     <tr>
         <td>Most Efficient Drone</td>
-        <td>Parrot AR 2.0</td>
+        <td>Parrot AR 2.0 {# DUMMY DATA #}</td>
     </tr>
     <tr>
         <td>Most Used Drone</td>
-        <td>Micro Drone</td>
+        <td>{{ current_user.most_used_drone.0 }}</td>
     </tr>
     <tr>
         <td>Last Flight</td>
-        <td>8/8/2013</td>
+        <td>{{ current_user.most_recent_flight.flight_date.strftime('%m-%d-%Y') }}</td>
     </tr>
 </table>

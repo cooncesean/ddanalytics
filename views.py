@@ -9,7 +9,7 @@ from flask_login import login_user, login_required, logout_user, \
 from ddanalytics import app, login_manager
 from ddanalytics.conf import MOCK_USERNAME, REFERRER_PARTER_NAME
 from ddanalytics.models import Drone
-from ddanalytics.utils import load_user
+from ddanalytics.utils import load_user, format_number
 
 
 # Main Navigation ##########################
@@ -32,6 +32,11 @@ def analytics():
     """
     # Get `flights over time` data for the current user
     flight_history = current_user.flight_history_by_month_and_drone()
+
+    # Format a few user fields
+    current_user.highest_flight = format_number(current_user.highest_flight)
+    current_user.cumulative_flights = format_number(current_user.cumulative_flights)
+
     return render_template('analytics.html', flight_history=flight_history)
 
 @app.route('/fleet/')

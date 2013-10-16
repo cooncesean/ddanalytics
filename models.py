@@ -50,7 +50,7 @@ class User(db.Document):
         Return a list of flight history objects grouped by drone model and by month.
         This data is used in the `flights_over_time` graph.
 
-        TODO: The returned data is cached for 30 minutes.
+        TODO: Cache returned data for 30 minutes.
         Sample:
         {
             'months': ['May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct'],
@@ -59,10 +59,7 @@ class User(db.Document):
                     'name': 'Some Drone Model Name',
                     'data': [1, 2, 4, 6, 12, 5]
                 },
-                {
-                    'name': 'Another Drone Model Name',
-                    'data': [21, 5, 4, 6, 12, 7]
-                },
+                ...
             ]
         }
         """
@@ -89,6 +86,23 @@ class User(db.Document):
 
         final_flight_history['graph_data'] = grouped_flights
         return final_flight_history
+
+    @property
+    def most_used_drone(self):
+        " Return the most used drone based on the user's flight history. "
+        if not self.flights:
+            return None
+        self.flights.sort(key=lambda x:x.drone.model)
+        grouped_flights_by_model = [(k, len(list(v))) for k, v in groupby(self.flights, key=lambda x:x.drone.model)]
+        grouped_flights_by_model.sort(key=lambda x:x[1], reverse=True)
+        return grouped_flights_by_model[0]
+
+    @property
+    def most_recent_flight(self):
+        " Return the most recent flight based on the user's flight history. "
+        if not self.flights:
+            return None
+        return self.flights[-1]
 
 class Drone(db.Document):
     " A drone object that belongs to a specific user. "

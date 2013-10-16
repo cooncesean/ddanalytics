@@ -1,4 +1,5 @@
 import datetime
+import locale
 import random
 from ddanalytics import login_manager
 from ddanalytics.models import User, Drone, FlightHistory
@@ -73,3 +74,8 @@ def _trim_float(decimal, precision=2):
     " Utility method to trim a floated "
     slen = len('%.*f' % (precision, decimal))
     return float(str(decimal)[:slen])
+
+def format_number(number):
+    " Return a comma formatted number. "
+    locale.setlocale(locale.LC_ALL, '')
+    return format(number, "n")
