@@ -1,4 +1,4 @@
-from ddanalytics import app as application, login_manager
+from ddanalytics import app as application
 # from ddanalytics.views import *
 
 @application.route('/test')
