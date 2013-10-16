@@ -79,3 +79,7 @@ def format_number(number):
     " Return a comma formatted number. "
     locale.setlocale(locale.LC_ALL, '')
     return format(number, "n")
+
+def percentage(part, whole):
+    " Return the percentage of a number. "
+    return 100 * float(part)/float(whole)

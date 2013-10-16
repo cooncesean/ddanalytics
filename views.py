@@ -36,7 +36,7 @@ def analytics():
     # Format a few user fields
     current_user.highest_flight = format_number(current_user.highest_flight)
     current_user.cumulative_flights = format_number(current_user.cumulative_flights)
-
+    current_user.formatted_drone_usage = [[k, v] for k, v in current_user.drone_usage.iteritems()]
     return render_template('analytics.html', flight_history=flight_history)
 
 @app.route('/fleet/')

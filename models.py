@@ -51,7 +51,7 @@ class User(db.Document):
         This data is used in the `flights_over_time` graph.
 
         TODO: Cache returned data for 30 minutes.
-        Sample:
+        Returns:
         {
             'months': ['May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct'],
             'graph_data': [
@@ -103,6 +103,24 @@ class User(db.Document):
         if not self.flights:
             return None
         return self.flights[-1]
+
+    @property
+    def drone_usage(self):
+        """
+        Fetch a dictionary of drone usage for the user.
+        Returns:{
+            'Parrot AR': 25%,
+            'Turbo Ace': 25%,
+            'MD 400': 50%
+        }
+        """
+        from ddanalytics.utils import percentage, _trim_float
+        drone_usage = {}
+        self.flights.sort(key=lambda x:x.drone.model)
+        for k, v in [(k, len(list(v))) for k, v in groupby(self.flights, key=lambda x:x.drone.model)]:
+            pct = percentage(v, len(self.flights))
+            drone_usage.setdefault(k, _trim_float(pct))
+        return drone_usage
 
 class Drone(db.Document):
     " A drone object that belongs to a specific user. "

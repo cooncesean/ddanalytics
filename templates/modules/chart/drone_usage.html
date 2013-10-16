@@ -18,14 +18,15 @@
                 showInLegend: true
             }
         },
+        tooltip: {
+            pointFormat: 'Usage: {point.y}%'
+        },
         series: [{
             type: 'pie',
             data: [
-                ['Micro', 26.8],
-                ['Parrot AR', 16.8],
-                ['Phantom',    8.5],
-                ['Turbo Ace',     6.2],
-                ['Coax',   0.7]
+                {% for du in current_user.formatted_drone_usage %}
+                    ['{{ du.0 }}', {{ du.1 }}],
+                {% endfor %}
             ]
         }]
     });
