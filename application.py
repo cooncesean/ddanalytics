@@ -1,5 +1,7 @@
-from ddanalytics import app as application
+# from ddanalytics import app as application
 # from ddanalytics.views import *
+from flask import Flask
+application = Flask(__name__)
 
 @application.route('/test')
 def test():
