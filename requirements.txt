@@ -4,3 +4,4 @@ mongoengine
 flask_mongoengine
 flask-login
 blinker
+raven[flask]
