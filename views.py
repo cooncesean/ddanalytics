@@ -19,7 +19,7 @@ def home():
     Renders the home page for an-unauth'd user. Users who
     are auth'd will be redirected to their `analytics` page.
     """
-    if request.user.is_authenticated():
+    if current_user.is_authenticated():
         return redirect(url_for('analytics'))
     return render_template('home.html')
 
@@ -31,8 +31,8 @@ def analytics():
     data pulled in from their DroneDeploy account.
     """
     # Get `flights over time` data for the current user
-    # current_user.
-    return render_template('analytics.html')
+    flight_history = current_user.flight_history_by_month_and_drone()
+    return render_template('analytics.html', flight_history=flight_history)
 
 @app.route('/fleet/')
 @login_required

@@ -31,10 +31,10 @@ def generate_dev_data():
     print '-----------------'
 
     MODEL_AND_MANFACTURERS = [
-        ('Parrot', 'AR 2.0', 'Default AR Lipo', 'Default AR Props', 'Brushless Parrot Motor'),
-        ('MicroDrone', 'MD4-1000', 'MD4-5500 Lipo', 'MD4 Prop', 'Brushless MD4 Motor'),
-        ('DJI', 'Phantom', 'DJI Flight Battery', 'DJI Carbon Props', 'Brushless DJI'),
-        ('TurboAce', 'X830', 'X830 Lipo', 'X830 Polyurethane Propeller', 'X830 Brushless Motor'),
+        ('AR 2.0', 'Parrot', 'Default AR Lipo', 'Default AR Props', 'Brushless Parrot Motor'),
+        ('MD4-1000', 'MicroDrone', 'MD4-5500 Lipo', 'MD4 Prop', 'Brushless MD4 Motor'),
+        ('Phantom', 'DJI', 'DJI Flight Battery', 'DJI Carbon Props', 'Brushless DJI'),
+        ('X830', 'TurboAce', 'X830 Lipo', 'X830 Polyurethane Propeller', 'X830 Brushless Motor'),
     ]
     print 'Creating Drone Army....'
     for i in range(random.randint(5, 7)):

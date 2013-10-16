@@ -14,8 +14,13 @@
             min: 0.5,
             max: 5.5,
             categories: [
-                'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct'
+                {% for month in flight_history.months %}
+                    '{{ month }}',
+                {% endfor %}
             ]
+        },
+        tooltip: {
+            pointFormat: '{point.y} {series.name} flights'
         },
         yAxis: {
             min: 0,
@@ -23,24 +28,13 @@
                 text: 'Number of Flights'
             }
         },
-        series: [{
-            name: 'DJI Phantom',
-            data: [
-                31, 23, 40, 48, 35, 61, 74
-            ]
-        },
-        {
-            name: 'Parrot AR 2.0',
-            data: [
-                50, 21, 34, 31, 23, 33, 51
-            ]
-        },
-        {
-            name: 'MicroDrone - 1000',
-            data: [
-                12, 14, 26, 11, 10, 17, 44
-            ]
-        }]
+        series: [
+            {% for fh in flight_history.graph_data %}
+                {
+                    'name': '{{ fh.name }}',
+                    'data': {{ fh.data }}
+                },
+            {% endfor %}
+        ]
     });
-
 </script>

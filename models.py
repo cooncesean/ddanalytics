@@ -1,6 +1,7 @@
 import datetime
 from ddanalytics import db
 from flask import url_for
+from itertools import groupby
 from mongoengine.signals import post_save, post_delete
 
 
@@ -43,6 +44,51 @@ class User(db.Document):
 
     def get_id(self):
         return self.username
+
+    def flight_history_by_month_and_drone(self):
+        """
+        Return a list of flight history objects grouped by drone model and by month.
+        This data is used in the `flights_over_time` graph.
+
+        TODO: The returned data is cached for 30 minutes.
+        Sample:
+        {
+            'months': ['May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct'],
+            'graph_data': [
+                {
+                    'name': 'Some Drone Model Name',
+                    'data': [1, 2, 4, 6, 12, 5]
+                },
+                {
+                    'name': 'Another Drone Model Name',
+                    'data': [21, 5, 4, 6, 12, 7]
+                },
+            ]
+        }
+        """
+        final_flight_history = {'months': []}
+        grouped_flights = []
+
+        # Get a set of drone models for the user
+        drone_models = set([drone.model for drone in self.drones])
+
+        # Get a filtered (sub)list of flights for each specific drone model
+        for dm in drone_models:
+            _data = {'name': dm, 'data': []}
+
+            # Filter and sort the flight history by current model
+            filtered_flights = [flight for flight in self.flights if flight.drone.model == dm]
+            filtered_flights.sort(key=lambda x:x.flight_date)
+
+            # Group and sum the month counts
+            for k, v in groupby(filtered_flights, key=lambda x:x.flight_date.strftime('%b')):
+                _data['data'].append(len([d for d in v]))
+                final_flight_history['months'].append(k)
+
+            grouped_flights.append(_data)
+
+        final_flight_history['graph_data'] = grouped_flights
+        return final_flight_history
 
 class Drone(db.Document):
     " A drone object that belongs to a specific user. "
