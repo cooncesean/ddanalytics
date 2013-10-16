@@ -1,11 +1,11 @@
-# from ddanalytics import app as application
-# from ddanalytics.views import *
-from flask import Flask
+from flask import Flask, render_template
 application = Flask(__name__)
 
 @application.route('/test')
 def test():
-    return 'test works'
+    return render_template('home.html')
+
+# from ddanalytics.views import *
 
 if __name__ == '__main__':
     application.run(host='0.0.0.0', debug=True)
