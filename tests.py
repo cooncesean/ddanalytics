@@ -24,5 +24,13 @@ class TestModels(DDAnalyticsTestCase):
         " Assert the `Flight.post_delete()` correctly removes the drone to the `User.flights` list. "
         raise
 
+    def test_most_used_drone(self):
+        " Assert the `User.most_used_drone()` method returns the most used Drone based on flight history of the user. "
+        raise
+
+    def test_flight_history_by_month_and_drone(self):
+        " Assert the `User.flight_history_by_month_and_drone()` returns the expected data based on the user's flight history. "
+        raise
+
 if __name__ == '__main__':
     unittest.main()

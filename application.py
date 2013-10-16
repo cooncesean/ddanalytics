@@ -1,4 +1,5 @@
-from ddanalytics import *
+from ddanalytics import app as application, login_manager
+from ddanalytics.views import *
 
 if __name__ == '__main__':
-    app.run(host='0.0.0.0', debug=True)
+    application.run(host='0.0.0.0', debug=True)
