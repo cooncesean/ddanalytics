@@ -17,10 +17,7 @@ sentry = Sentry(
 def test():
     return render_template('home.html')
 
-from ddanalytics.views import *
-
-
-
+# from ddanalytics.views import *
 
 if __name__ == '__main__':
     application.run(host='0.0.0.0', debug=True)
