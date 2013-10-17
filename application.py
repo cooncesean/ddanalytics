@@ -13,11 +13,9 @@ sentry = Sentry(
     dsn='https://cf84591bc153450c9a0ca18e35616d5d:3c1ec9c846da43dbb2981f8ce6a1e7db@app.getsentry.com/4404'
 )
 
-# from ddanalytics import db
-
 @application.route('/test')
 def test():
-    raise Exception('you stinkkk')
+    from ddanalytics import db
     return render_template('home.html')
 
 if __name__ == '__main__':
