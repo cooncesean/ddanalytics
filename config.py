@@ -12,16 +12,19 @@ class Config(object):
     TESTING = False
     REFERRER_PARTER_NAME = 'dronedeploy-analytics'
     MOCK_USERNAME = 'Mock User'
+    ADMINS = ['cooncesean@gmail.com']
+    EMAIL_HOST = 'smtp.gmail.com'
+    EMAIL_HOST_USER = 'stompapp@gmail.com'
+    EMAIL_HOST_PASSWORD = 'c0ln1elmustard'
+    EMAIL_PORT = 587
 
 class Development(Config):
-    DEBUG = True
+    # DEBUG = True
     MONGODB_SETTINGS = {
         'db': '%s_development_db' % PROJECT_NAME,
     }
 
 class Production(Config):
-    DATABASE = 'production_db'
-    DEBUG = True
     MONGODB_SETTINGS = {
         'db': '%s' % PROJECT_NAME,
         'username': 'coonce',
@@ -31,7 +34,6 @@ class Production(Config):
     }
 
 class Test(Config):
-    DATABASE = 'testing_db'
     DEBUG = True
     MONGODB_SETTINGS = {
         'db': '%s_test_db' % PROJECT_NAME,
