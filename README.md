@@ -6,7 +6,7 @@ This is a simple Flask application running on Elastic Beanstalk and backed by Mo
 
 This site was built for entertainment purposes only and is not in any way associated with the DroneDeploy service.
 
-The production site can be found at: **[http://ddanalytics-env-cajk5kpbae.elasticbeanstalk.com/](http://ddanalytics-env-cajk5kpbae.elasticbeanstalk.com/)**
+The production site can be found at: **[http://www.dd-analytics.com/](http://www.dd-analytics.com/)**
 
 # Workflow
 ![workflow](http://f.cl.ly/items/393A0l1x3Q33220l0j1x/workflow.png)
