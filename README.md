@@ -8,9 +8,10 @@ This site was built for entertainment purposes only and is not in any way associ
 
 The production site can be found at: **[http://www.ddanalytics.com/](http://www.ddanalytics.com/)**
 
+# Workflow
+![workflow](https://f.cloud.github.com/assets/47877/1354477/2a813eb8-3755-11e3-8d0d-19733195ac78.png)
 
-
-# Project Scope
+# Scope
 Due to time constraints, this project is limited in scope. I essentially wanted to see how quickly I could pick up Flask, model and develop a functional site, and deploy it on AWS. That said, here are some of the concessions I have made along the way:
 
 ###Data:
