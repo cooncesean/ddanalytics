@@ -3,7 +3,6 @@ App loader for ElasticBeanstalk. Amazon expects the app
 to be loaded from `project.application.py` through the
 use of the `application` var instead of `app`.
 """
-raise Exception(__name__)
 from flask import Flask
 from flask_environments import Environments
 from flask_login import LoginManager
@@ -34,5 +33,6 @@ sentry = Sentry(
 # Import the app's views
 from ddanalytics.views import *
 
-if __name__ == '__main__':
-    application.run(host='0.0.0.0', debug=True)
+# WTF - This never gets on (even on production b/c __name__ == '_mod_wsgi_c43d580a63001a918a0ca7939113f619')
+# if __name__ == '__main__':
+#     application.run(host='0.0.0.0', debug=True)
