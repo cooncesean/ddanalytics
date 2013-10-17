@@ -7,6 +7,7 @@ import os
 import sys
 
 sys.path.append(os.path.abspath(os.path.join(os.path.dirname(__file__), '..')))
+raise Exception(sys.path)
 
 from flask import Flask
 from flask_environments import Environments
