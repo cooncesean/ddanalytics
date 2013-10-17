@@ -1,5 +1,4 @@
-from flask import render_template, request, url_for, redirect, \
-    abort
+from flask import render_template, request, url_for, redirect
 from flask_login import login_user, login_required, logout_user, \
     current_user
 from ddanalytics import login_manager, application
@@ -124,7 +123,7 @@ def login(methods=['GET']):
         user = load_user(application.config.get('MOCK_USERNAME'))
         login_user(user)
         return redirect(request.args.get('next', url_for('analytics')))
-    return abort(404)
+    return 'You must pass a valid oAuth token to login.'
 
 @application.route('/logout/')
 @login_required
