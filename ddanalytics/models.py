@@ -1,5 +1,5 @@
 import datetime
-from ddanalytics.application import db
+from ddanalytics import db
 from flask import url_for
 from itertools import groupby
 from mongoengine.signals import post_save, post_delete

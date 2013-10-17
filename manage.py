@@ -1,14 +1,15 @@
 import os
 import sys
 import unittest
-
-sys.path.append(os.path.abspath(os.path.join(os.path.dirname(__file__), '..')))
-
 from flask.ext.script import Manager, Server
-from ddanalytics.application import application
-from ddanalytics import utils, models, tests
+from ddanalytics import create_application
 
+application = create_application('DEVELOPMENT')
 manager = Manager(application)
+
+from ddanalytics.utils import flush_database, generate_dev_data
+from ddanalytics.tests import TestModels
+
 
 # Turn on debugger by default and reloader
 manager.add_command("runserver", Server(
@@ -25,8 +26,8 @@ def bootstrap():
         return
 
     # Flush the database
-    # db.dropDatabase() -- there isnt' a flush database command???
-    utils.flushDatabase()
+    # db.dropDatabase() -- there isnt' a mongoengine flush db command???
+    utils.flush_database()
 
     # Load data
     utils.generate_dev_data()
@@ -34,7 +35,7 @@ def bootstrap():
 @manager.command
 def run_tests():
     " Run unit tests for the project. "
-    suite = unittest.TestLoader().loadTestsFromTestCase(tests.TestModels)
+    suite = unittest.TestLoader().loadTestsFromTestCase(TestModels)
     unittest.TextTestRunner(verbosity=2).run(suite)
 
 if __name__ == "__main__":

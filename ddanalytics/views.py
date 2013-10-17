@@ -1,12 +1,8 @@
-""""
-This is the flask file that will define the views
-necessary to serve the application.
-"""
 from flask import render_template, request, url_for, redirect, \
     abort
 from flask_login import login_user, login_required, logout_user, \
     current_user
-from ddanalytics.application import application, login_manager
+from ddanalytics import login_manager, application
 from ddanalytics.utils import load_user, format_number
 
 

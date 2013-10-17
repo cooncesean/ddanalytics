@@ -19,7 +19,6 @@ class Config(object):
     EMAIL_PORT = 587
 
 class Development(Config):
-    # DEBUG = True
     MONGODB_SETTINGS = {
         'db': '%s_development_db' % PROJECT_NAME,
     }

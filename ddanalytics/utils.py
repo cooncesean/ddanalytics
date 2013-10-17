@@ -2,7 +2,7 @@ import datetime
 import inspect
 import locale
 import random
-from ddanalytics.application import login_manager, db, application
+from ddanalytics import login_manager, db, application
 from ddanalytics.models import User, Drone, FlightHistory
 
 
@@ -17,9 +17,9 @@ def load_user(username):
 
 def generate_dev_data():
     " Generates a handful of dev data to bootstrap the site. "
-    print 'Creating User: %s' % app.config.get('MOCK_USERNAME')
+    print 'Creating User: %s' % application.config.get('MOCK_USERNAME')
     user = User.objects.create(
-        username = app.config.get('MOCK_USERNAME'),
+        username = application.config.get('MOCK_USERNAME'),
         avg_flight_time = _trim_float(random.uniform(1.3, 4.7)),
         longest_flight_time = _trim_float(random.uniform(4.1, 5.2)),
         cumulative_flight_time = random.randint(354, 544),
@@ -84,7 +84,7 @@ def percentage(part, whole):
     " Return the percentage of a number. "
     return 100 * float(part)/float(whole)
 
-def flushDatabase():
+def flush_database():
     print 'Flushing database....'
     for name, cls in inspect.getmembers(models, inspect.isclass):
         if issubclass(cls, db.Document):
