@@ -3,12 +3,7 @@ App loader for ElasticBeanstalk. Amazon expects the app
 to be loaded from `project.application.py` through the
 use of the `application` var instead of `app`.
 """
-import os
-import sys
-
-# sys.path.append(os.path.abspath(os.path.join(os.path.dirname(__file__), '..')))
-raise Exception(sys.path)
-
+raise Exception(__name__)
 from flask import Flask
 from flask_environments import Environments
 from flask_login import LoginManager
