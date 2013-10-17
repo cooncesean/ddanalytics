@@ -17,6 +17,7 @@ sentry = Sentry(
 
 @application.route('/test')
 def test():
+    raise Exception('you stinkkk')
     return render_template('home.html')
 
 if __name__ == '__main__':
