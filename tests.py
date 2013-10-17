@@ -1,5 +1,5 @@
 import unittest
-import ddanalytics
+from ddanalytics.application import application
 from ddanalytics.models import User
 from ddanalytics.utils import flushDatabase
 
@@ -8,9 +8,9 @@ class DDAnalyticsTestCase(unittest.TestCase):
     " Unit tests for the `ddanalytics` project. "
     def setUp(self):
         # Configure test settings
-        ddanalytics.app.config['MONGODB_SETTINGS'] = {'DB': 'test-ddanalytics'}
-        ddanalytics.app.config['TESTING'] = True
-        self.app = ddanalytics.app.test_client()
+        application.config['MONGODB_SETTINGS'] = {'DB': 'test-ddanalytics'}
+        application.config['TESTING'] = True
+        self.app = application.test_client()
 
         # Create default user object
         self.user = User.objects.create(username='test-user')

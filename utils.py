@@ -2,22 +2,23 @@ import datetime
 import inspect
 import locale
 import random
-from ddanalytics import login_manager, db, models, app
+from ddanalytics.application import login_manager, db, application
+from ddanalytics.models import User, Drone, FlightHistory
 
 
 @login_manager.user_loader
 def load_user(username):
     " Callback used to reload the user object from the user ID stored in the session. "
     try:
-        return models.User.objects.get(username=username)
-    except models.User.DoesNotExist:
+        return User.objects.get(username=username)
+    except User.DoesNotExist:
         pass
     return None
 
 def generate_dev_data():
     " Generates a handful of dev data to bootstrap the site. "
     print 'Creating User: %s' % app.config.get('MOCK_USERNAME')
-    user = models.User.objects.create(
+    user = User.objects.create(
         username = app.config.get('MOCK_USERNAME'),
         avg_flight_time = _trim_float(random.uniform(1.3, 4.7)),
         longest_flight_time = _trim_float(random.uniform(4.1, 5.2)),
@@ -39,7 +40,7 @@ def generate_dev_data():
     print 'Creating Drone Army....'
     for i in range(random.randint(5, 7)):
         mm_tup = MODEL_AND_MANFACTURERS[random.randint(0, len(MODEL_AND_MANFACTURERS) - 1)]
-        drone = models.Drone.objects.create(
+        drone = Drone.objects.create(
             user = user,
             model = mm_tup[0],
             manufacturer = mm_tup[1],
@@ -63,7 +64,7 @@ def generate_dev_data():
     ]
     for flight_date in FLIGHT_DATES:
         for i in range(random.randint(10, 25)):
-            fl = models.FlightHistory.objects.create(
+            fl = FlightHistory.objects.create(
                 user = user,
                 drone = user.drones[random.randint(0, len(user.drones) - 1)],
                 flight_date = flight_date

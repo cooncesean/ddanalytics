@@ -1,18 +1,17 @@
 """"
 This is the flask file that will define the views
-necessary to serve the app.
+necessary to serve the application.
 """
 from flask import render_template, request, url_for, redirect, \
     abort
 from flask_login import login_user, login_required, logout_user, \
     current_user
-from ddanalytics import app, login_manager
-from ddanalytics.models import Drone
+from ddanalytics.application import application, login_manager
 from ddanalytics.utils import load_user, format_number
 
 
 # Main Navigation ##########################
-@app.route('/')
+@application.route('/')
 def home():
     """
     Renders the home page for an-unauth'd user. Users who
@@ -22,7 +21,7 @@ def home():
         return redirect(url_for('analytics'))
     return render_template('home.html')
 
-@app.route('/analytics/')
+@application.route('/analytics/')
 @login_required
 def analytics():
     """
@@ -38,7 +37,7 @@ def analytics():
     current_user.formatted_drone_usage = [[k, v] for k, v in current_user.drone_usage.iteritems()]
     return render_template('analytics.html', flight_history=flight_history)
 
-@app.route('/fleet/')
+@application.route('/fleet/')
 @login_required
 def fleet():
     """
@@ -60,13 +59,13 @@ def fleet():
                     'type': 'Battery',
                     'name': 'AR Max Life Lipo',
                     'benefit': '15% increase in batery life',
-                    'link': 'http://www.amazon.com/Parrot-AR-Drone-Battery-LiPo-Replacement/dp/B0041G5Y8W?referrer_partner=%s' % app.config.get('REFERRER_PARTER_NAME')
+                    'link': 'http://www.amazon.com/Parrot-AR-Drone-Battery-LiPo-Replacement/dp/B0041G5Y8W?referrer_partner=%s' % application.config.get('REFERRER_PARTER_NAME')
                 },
                 {
                     'type': 'Propeller',
                     'name': '16" Carbon Fiber Props',
                     'benefit': '56% increase in lift',
-                    'link': 'http://www.amazon.com/Parrot-Upgrade-Propeller-Blades-Carbon/dp/B00CCJL3BC?referrer_partner=%s' % app.config.get('REFERRER_PARTER_NAME')
+                    'link': 'http://www.amazon.com/Parrot-Upgrade-Propeller-Blades-Carbon/dp/B00CCJL3BC?referrer_partner=%s' % application.config.get('REFERRER_PARTER_NAME')
                 }
             ]
         },
@@ -82,7 +81,7 @@ def fleet():
                     'type': 'Motor',
                     'name': 'Traxxas 3351',
                     'benefit': '32% increase in power',
-                    'link': 'http://www.amazon.com/Traxxas-3351-Velineon-Brushless-Motor/dp/B000SU3VCG?referrer_partner=%s' % app.config.get('REFERRER_PARTER_NAME')
+                    'link': 'http://www.amazon.com/Traxxas-3351-Velineon-Brushless-Motor/dp/B000SU3VCG?referrer_partner=%s' % application.config.get('REFERRER_PARTER_NAME')
                 }
             ]
         },
@@ -98,7 +97,7 @@ def fleet():
                     'type': 'Battery',
                     'name': 'DJI Phantom 4000 Lipo',
                     'benefit': '62% increase in battery life',
-                    'link': 'http://www.bhphotovideo.com/bnh/controller/home?O=&sku=964487&Q=&is=REG&A=details&referrer_partner=%s' % app.config.get('REFERRER_PARTER_NAME')
+                    'link': 'http://www.bhphotovideo.com/bnh/controller/home?O=&sku=964487&Q=&is=REG&A=details&referrer_partner=%s' % application.config.get('REFERRER_PARTER_NAME')
                 }
             ]
         },
@@ -116,7 +115,7 @@ def fleet():
     return render_template('fleet.html', recommendations=recommendations)
 
 # Authentication ###########################
-@app.route('/login/')
+@application.route('/login/')
 def login(methods=['GET']):
     """
     'Authenticate' the user coming back from the fake
@@ -126,12 +125,12 @@ def login(methods=['GET']):
     # We are faking oAuth for the sake of the demo
     if request.args.get('token', None):
         # Always load the default 'mock' user
-        user = load_user(app.config.get('MOCK_USERNAME'))
+        user = load_user(application.config.get('MOCK_USERNAME'))
         login_user(user)
         return redirect(request.args.get('next', url_for('analytics')))
     return abort(404)
 
-@app.route('/logout/')
+@application.route('/logout/')
 @login_required
 def logout():
     " De-authenticate (is that a word?) the user. "
