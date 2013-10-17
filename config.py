@@ -21,6 +21,7 @@ class Development(Config):
 
 class Production(Config):
     DATABASE = 'production_db'
+    DEBUG = True
     MONGODB_SETTINGS = {
         'db': '%s' % PROJECT_NAME,
         'username': 'coonce',
@@ -35,3 +36,4 @@ class Test(Config):
     MONGODB_SETTINGS = {
         'db': '%s_test_db' % PROJECT_NAME,
     }
+    TESTING = True
