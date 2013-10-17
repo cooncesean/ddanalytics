@@ -12,7 +12,7 @@
             <br /><br />
 
             <section id='splash-button'>
-                <input type='button' class='btn btn-splash' value='Sign In With DroneDeploy &raquo;' />
+                <input id='btn-auth' type='button' class='btn btn-splash' value='Sign In With DroneDeploy &raquo;' />
             </section>
 
             <section id='splash-signup'>
@@ -21,4 +21,10 @@
             </section>
         </section>
     </div>
+
+    <script>
+        $('#btn-auth').click(function(){
+            window.location.href = 'http://mockdronedeploy-env-d6s9sievic.elasticbeanstalk.com/oauth/authorize/?client_id=some_fake_id&redirect_uri=http://back.to.my.site.com/';
+        })
+    </script>
 {% endblock %}

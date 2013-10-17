@@ -28,6 +28,8 @@ For the sake of the example, there is only one user in the system `Mock User`. T
 ###Mocked oAuth:
 In the interest of time, I have decided against implementing full oAuth integration into this sample site. All auth, redirects, tokens, etc. are currently mocked. In the meantime, I'll peruse the [http://pythonhosted.org/Flask-OAuth/](http://pythonhosted.org/Flask-OAuth/) extension for reference.
 
+The mock DroneDeploy site (that performs the 'authenticatin') can be found [here](https://github.com/cooncesean/mock_dronedeploy).
+
 # Architecture
 This is my first Flask application. I have done a fair amount of research regarding architecture best practices and have come to the conclusion that Flask is a very open ended, lightweight framework that leaves those decisions up to you. Blessing and a curse I guess. If you have any recommendations or notes, I would love to discuss them.
 
