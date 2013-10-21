@@ -84,7 +84,7 @@ class User(db.Document):
 
             grouped_flights.append(_data)
 
-
+        # Sort the flight data to make the graph prettier
         grouped_flights.sort(key=lambda x:sum(x['data']), reverse=True)
         final_flight_history['graph_data'] = grouped_flights
         return final_flight_history

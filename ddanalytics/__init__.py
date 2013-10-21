@@ -3,7 +3,7 @@ db = None
 login_manager = None
 application = None
 
-def create_application(default_env):
+def create_application(default_env='DEVELOPMENT'):
     """
     Util method to create a fully configured `Flask app` object for
     production/development/testing envs. We set all config'd objects
